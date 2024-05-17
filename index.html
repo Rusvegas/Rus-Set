@@ -4,8 +4,8 @@
     <title>RUSVEGAS - MetaMask Integration</title>
 </head>
 <body>
-    <button id="signupButton">Sign Up with MetaMask</button>
-    <button id="loginButton">Login with MetaMask</button>
+    <button id="signupButton" style="display:none;">Sign Up with MetaMask</button>
+    <button id="loginButton" style="display:none;">Login with MetaMask</button>
     <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
     <script>
         // Check if MetaMask is installed
@@ -27,11 +27,11 @@
             }
         }
 
-        document.getElementById('signupButton').addEventListener('click', async () => {
+        async function handleSignup() {
             const userAddress = await connectMetaMask();
             if (userAddress) {
                 // Call your backend to create a new user account
-                fetch('/api/signup', {
+                fetch('https://your-backend-url.com/api/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -47,13 +47,13 @@
                     }
                 });
             }
-        });
+        }
 
-        document.getElementById('loginButton').addEventListener('click', async () => {
+        async function handleLogin() {
             const userAddress = await connectMetaMask();
             if (userAddress) {
                 // Call your backend to log in the user
-                fetch('/api/login', {
+                fetch('https://your-backend-url.com/api/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -69,7 +69,16 @@
                     }
                 });
             }
-        });
+        }
+
+        window.onload = function() {
+            const hash = window.location.hash;
+            if (hash === '#signup') {
+                handleSignup();
+            } else if (hash === '#login') {
+                handleLogin();
+            }
+        }
     </script>
 </body>
 </html>
