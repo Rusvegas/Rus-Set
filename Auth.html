@@ -45,8 +45,61 @@
     <div class="container">
         <h1>Authentication Page</h1>
         <p>Welcome! Please sign in or sign up to continue.</p>
-        <a href="#" class="button">Login with Wallet</a>
-        <a href="#" class="button">Sign Up with Wallet</a>
+        <a href="#" class="button" onclick="signInWithWallet()">Login with Wallet</a>
+        <a href="#" class="button" onclick="signUpWithWallet()">Sign Up with Wallet</a>
     </div>
+
+    <!-- WalletConnect Core Initialization Script -->
+    <script src="https://unpkg.com/@walletconnect/core/dist/cjs/index.js"></script>
+    <script src="https://unpkg.com/@walletconnect/web3wallet/dist/cjs/index.js"></script>
+    <script>
+        async function signInWithWallet() {
+            // Initialize WalletConnect Core
+            const core = new Core({
+                projectId: 'b03f3ff6a87ea3114f76fca06cb45a5e'
+            });
+
+            // Metadata for WalletConnect session
+            const metadata = {
+                name: 'RusVegas',
+                description: 'Web3Modal Example',
+                url: 'https://web3modal.com', // Origin must match your domain & subdomain
+                icons: ['https://avatars.githubusercontent.com/u/37784886']
+            };
+
+            // Initialize Web3Wallet
+            const web3wallet = await Web3Wallet.init({
+                core, // Pass the shared 'core' instance
+                metadata
+            });
+
+            // Perform sign-in action here
+            console.log("Signing in with WalletConnect");
+        }
+
+        async function signUpWithWallet() {
+            // Initialize WalletConnect Core
+            const core = new Core({
+                projectId: 'b03f3ff6a87ea3114f76fca06cb45a5e'
+            });
+
+            // Metadata for WalletConnect session
+            const metadata = {
+                name: 'RusVegas',
+                description: 'Web3Modal Example',
+                url: 'https://web3modal.com', // Origin must match your domain & subdomain
+                icons: ['https://avatars.githubusercontent.com/u/37784886']
+            };
+
+            // Initialize Web3Wallet
+            const web3wallet = await Web3Wallet.init({
+                core, // Pass the shared 'core' instance
+                metadata
+            });
+
+            // Perform sign-up action here
+            console.log("Signing up with WalletConnect");
+        }
+    </script>
 </body>
 </html>
