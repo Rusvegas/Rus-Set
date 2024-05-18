@@ -1,1 +1,1 @@
-# metamask-integration
+# Rus-integration
